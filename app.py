@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, redirect
 import google.generativeai as genai
 import os
 from dotenv import load_dotenv
@@ -13,6 +13,12 @@ model = genai.GenerativeModel('gemini-pro')
 def askgemini(prompt):
     response = model.generate_content(contents=prompt)
     return response.text
+
+@app.route('/')
+def home():
+    #Weiterleitung zu github
+    return redirect("https://github.com/speetzial/GeminiAPIProxy", code=302)
+
 
 @app.route('/text', methods=['POST', 'GET'])
 def gemini():
