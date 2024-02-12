@@ -17,7 +17,7 @@ def askgemini(prompt):
 @app.route('/text', methods=['POST', 'GET'])
 def gemini():
     apikey=request.headers.get('key')
-    if apikey != "1234":
+    if apikey != os.getenv('SERVER_API_KEY'):
         return "Invalid API Key"
     else:
         promt = request.form['promt']
